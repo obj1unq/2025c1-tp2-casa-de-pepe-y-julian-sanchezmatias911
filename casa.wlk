@@ -71,7 +71,7 @@ object casaDePepeYJulian {
     method queFaltaComprar(lista){
     //Se espera que reciba de argumento una lista sin repetidos
 
-        return self.comprasSet().filter({bien => self.noCompre(bien,lista)})
+        return compras.filter({bien => not (self.compre(bien,lista))})
     }
 
     
@@ -96,7 +96,7 @@ object casaDePepeYJulian {
         /*  Proposito : Devuelve el ultimo bien comprado
             **No rompe porque solo se invoca si mi lista de compras no esta vacia**
         */
-        return compras.head()
+        return compras.last()
     }
     
     method compreAlgo(){
@@ -115,7 +115,7 @@ object casaDePepeYJulian {
     method comprasSet(){
         return compras.asSet()
     }
-    method noCompre(bien,lista){
+    method compre(bien,lista){
 
         return lista.contains(bien)
     }

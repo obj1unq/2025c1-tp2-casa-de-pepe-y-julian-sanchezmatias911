@@ -7,7 +7,24 @@ describe "test de compras"{
     casaDePepeYJulian.comprar(cama)
     casaDePepeYJulian.comprar(plancha)
     assert.equals(3,casaDePepeYJulian.cantidadDeCosasCompradas())
+
+    assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
+    assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
+
+    assert.that(casaDePepeYJulian.vieneDeComprar(electrodomestico))
+    assert.notThat(casaDePepeYJulian.vieneDeComprar(mueble))
+
+    assert.that(casaDePepeYJulian.esDerrochona())
     
+    assert.equals([heladera,plancha],casaDePepeYJulian.comprados(electrodomestico))
+    assert.equals([cama],casaDePepeYJulian.comprados(mueble))
+    
+    assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
+
+
+    // revisar queFaltaComprar()
+    assert.equals([paqueteDeFideos,tiraDeAsado],
+                    casaDePepeYJulian.queFaltaComprar([tiraDeAsado,paqueteDeFideos,plancha]))
     
     }
 }
