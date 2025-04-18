@@ -78,15 +78,15 @@ object casaDePepeYJulian {
     // ######################################################
 
     method queFaltaComprar(lista){
-    //Se espera que reciba de argumento una lista sin repetidos
+    /*Se espera que reciba de argumento una lista sin repetidos*/
 
-        return compras.filter({bien => not (self.compre(bien,lista))})
+        return lista.filter({bien => not (self.compre(bien,compras))})
     }
 
     
     // #########PROVISORIA##############
     //preguntar si esta bien llamar por la referencia global
-    //a un metodo exclusivo de ese objeto
+    //a un metodo que llama exclusivamente a ese objeto 
     method faltaComida(){
         return not compras.contains(comida)
     }

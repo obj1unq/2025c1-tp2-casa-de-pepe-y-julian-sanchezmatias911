@@ -4,7 +4,7 @@ import  cosas.*
 /*#################################
        AUN NO ESTA TERMINADO!!!
 * ################################# */
-describe "test de compras"{
+describe "test de casa de Julian"{
     test "Hacer que se compre una heladera, una cama y una placha"{
     casaDePepeYJulian.comprar(heladera)
     casaDePepeYJulian.comprar(cama)
@@ -24,10 +24,14 @@ describe "test de compras"{
     
     assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
 
-
-    // revisar queFaltaComprar()
-    assert.equals([paqueteDeFideos,tiraDeAsado],
+    assert.equals([tiraDeAsado,paqueteDeFideos],
                     casaDePepeYJulian.queFaltaComprar([tiraDeAsado,paqueteDeFideos,plancha]))
+
+    assert.that(casaDePepeYJulian.faltaComida())
+
+
+    assert.equals(#{electrodomestico,mueble}, casaDePepeYJulian.categoriasCompradas())
+
     
     }
 }
