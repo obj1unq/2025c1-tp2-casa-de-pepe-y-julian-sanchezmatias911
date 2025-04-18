@@ -6,15 +6,13 @@ object mueble {
 	
 }
 
-object comida {
-	method esComestible() = true
+object comida {	
 
 }
 
 object heladera {
 	method precio() { return 20000 }
 	method categoria() { return electrodomestico }
-	//method esDeCategoria(categoria) = self.categoria()==categoria
 	method esComestible() = false
 	
 }
@@ -22,7 +20,6 @@ object heladera {
 object cama {
 	method precio() { return 8000 }
 	method categoria() { return mueble }
-	//method esDeCategoria(categoria) = self.categoria() == categoria
 	method esComestible() = false
 	
 }
@@ -30,14 +27,16 @@ object cama {
 object tiraDeAsado {
 	method precio() { return 350 }
 	method categoria() { return comida }
-	//method esDeCategoria(categoria) = self.categoria()==categoria
+
+	//mensaje agregado
 	method esComestible() = true
 }
 
 object paqueteDeFideos {
 	method precio() { return 50 }
 	method categoria() { return comida }
-	//method esDeCategoria(categoria) = self.categoria()==categoria
+
+	//mensaje agregado
 	method esComestible() = true
 
 }
@@ -45,13 +44,16 @@ object paqueteDeFideos {
 object plancha {
 	method precio() { return 1200 }
 	method categoria() { return electrodomestico }
-	//method esDeCategoria(categoria) = self.categoria()==categoria
+	
+	//mensaje agregado
 	method esComestible() = false
 	
 }
 
 /* ################## CUENTAS ######################
 	-las *cuentas* saben decir:
+	 meAlcanza(): 
+	 gastar():
 	 saldo()
 	 depositar()
 	 extraer()
@@ -71,6 +73,9 @@ object cuentaCorriente{
         if((saldo-dinero) < 0){self.error("no cuenta con dinero suficiente")}
         else {saldo -= dinero}
     }
+
+	method gastar(dinero){saldo = saldo - dinero}
+	method meAlcanza(dinero) = saldo >= dinero
 }
 object cuentaGastos {
 	var saldo = 0 // valor iniciar para casaDePepeYJulian
@@ -94,4 +99,13 @@ object cuentaGastos {
 	method extraer(dinero) {
 		saldo = saldo - dinero
 	}
+
+	
+	method gastarSiAlcanza(dinero){
+		if(self.meAlcanza(dinero)){
+			saldo = saldo - dinero
+		} 
+		else {self.error("No hay saldo en esta cuenta")}//se espera que casaDePepeYJulian se pregunte si le alcanza antes de comprar
+	}
+	method meAlcanza(dinero) = saldo >= dinero
 }

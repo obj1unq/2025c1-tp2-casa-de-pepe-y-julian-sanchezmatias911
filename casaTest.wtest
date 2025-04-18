@@ -4,8 +4,13 @@ import  cosas.*
 /*#################################
        AUN NO ESTA TERMINADO!!!
 * ################################# */
-describe "test de casa de Julian"{
-    test "Hacer que se compre una heladera, una cama y una placha"{
+describe "test de casa de Julian "{
+
+    test "Hacer que se compre una heladera, una cama y una placha, teniendo saldo suficiente"{
+    //inicio su cuenta corriente
+    casaDePepeYJulian.cuentaActual(cuentaCorriente)
+    casaDePepeYJulian.depositar_enCuenta(100000)
+    //    
     casaDePepeYJulian.comprar(heladera)
     casaDePepeYJulian.comprar(cama)
     casaDePepeYJulian.comprar(plancha)
@@ -70,7 +75,17 @@ describe "test de casa de Julian"{
 
         casaDePepeYJulian.extraer_deCuenta(2000)
 
-        assert.that(true)
+    }
+
+    test "al comprar una cosa eso se vea afectado en la cuenta elegida previamente."{
+        
+        casaDePepeYJulian.cuentaActual(cuentaCorriente)
+        casaDePepeYJulian.depositar_enCuenta(1000)
+        assert.equals(1000, casaDePepeYJulian.saldoEnCuenta())
+
+        casaDePepeYJulian.comprar(tiraDeAsado)
+        casaDePepeYJulian.comprar(paqueteDeFideos)
+        assert.equals(600, casaDePepeYJulian.saldoEnCuenta())
         
     }
 }

@@ -22,7 +22,8 @@ object casaDePepeYJulian {
     var cuentaActual = cuentaCorriente
 
     
-    // ########## CUENTAS BANCARIAS ###########
+// ############## CUENTAS BANCARIAS #########################
+
     method cuentaActual() = cuentaActual
 
     method saldoEnCuenta() =  cuentaActual.saldo()
@@ -30,7 +31,7 @@ object casaDePepeYJulian {
     method cuentaActual(_cuentaActual){ //
         cuentaActual = _cuentaActual
     }
-    // NO NECESITO CUENTA COMO ARGUMENTO PORQUE YA LO HACE EN LA CUENTA ACTUAL
+    
     method depositar_enCuenta(dinero){
         cuentaActual.depositar(dinero)
     } 
@@ -39,24 +40,23 @@ object casaDePepeYJulian {
         cuentaActual.extraer(dinero)
     }
 
-    
-
-   
-    
-
-    // ######################################## 
+// ##########################################################
 
     
     method comprar(cosa){ 
+        /*
+            -Si alcanza el dinero del saldo, compra actualizando su saldo y lista de compras
+            -Si no alcanza lanza una excepcion
+        */
+        cuentaActual.gastarSiAlcanza(cosa.precio()) 
         compras.add(cosa)
     }
-
+    
     method cantidadDeCosasCompradas() = compras.size()
 
     method tieneAlgun(categoria) = compras.any({bien =>bien.categoria() == categoria})
     
-
-    method vieneDeComprar(categoria){ //
+    method vieneDeComprar(categoria){ 
             
             if (not self.compreAlgo()){ 
                     self.error("no compre nada de nada")
@@ -67,8 +67,7 @@ object casaDePepeYJulian {
 
     method esDerrochona() = self.importeTotal()>= 9000
     
-
-     method compraMasCara(){
+    method compraMasCara(){
          /*
             Proposito: 
                 *devuelve el objeto con el precio mas caro de mi lista de compras
@@ -81,15 +80,8 @@ object casaDePepeYJulian {
 
     method comprados(categoria) = compras.filter({bien => bien.categoria() == categoria}) 
     
-
-
-    method malaEpoca(){
-        return compras.all({bien => bien.esDeComestible()})
-    }
-
-   
+    method malaEpoca()= compras.all({bien => bien.esDeComestible()})
     
-
     method queFaltaComprar(lista){
     /* PROPOSITO: devuelve una lista de objetos de **lista** que no compre,
                   es decir, que no esta en **compras**,
@@ -116,7 +108,6 @@ object casaDePepeYJulian {
     
     method compreAlgo()=  not compras.isEmpty()
     
-
     method importeTotal(){
         /*
             Proposito: Si compre bienes me da la suma de todas las compras
@@ -130,14 +121,8 @@ object casaDePepeYJulian {
 
     method compre(bien) = compras.contains(bien)
     
-    method compreSoloComida() {
-         return compras.all({bien => bien.esComestible()}) 
-    }
+    method compreSoloComida() = compras.all({bien => bien.esComestible()}) 
     
-   
-    
-   
-
 }
 
 
