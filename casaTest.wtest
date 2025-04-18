@@ -2,7 +2,12 @@ import casa.*
 import  cosas.*
 
 describe "test de compras"{
-    test "quiero heladera"{
-        assert.equals(heladera,[cama,heladera,tiraDeAsado].maxIfEmpty({bien => bien.precio()},{"Esta lista esta vacia"}))
+    test "Hacer que se compre una heladera, una cama y una placha"{
+    casaDePepeYJulian.comprar(heladera)
+    casaDePepeYJulian.comprar(cama)
+    casaDePepeYJulian.comprar(plancha)
+    assert.equals(3,casaDePepeYJulian.cantidadDeCosasCompradas())
+    
+    
     }
 }

@@ -57,7 +57,7 @@ object casaDePepeYJulian {
         return compras.filter({bien => bien.categoria()==categoria}) 
     }
 
-    // ################################
+    // #######################################################
     // SOLUCION PROVISORIA
     method malaEpoca(){
         return compras.all({bien => self.esDeCategoria(bien,comida)})
@@ -66,14 +66,29 @@ object casaDePepeYJulian {
     method esDeCategoria(bien,categoria){
         return bien.categoria()==categoria
     }
-    // ###############################
+    // ######################################################
 
-    method queFaltaComprar(lista){//pregunta
+    method queFaltaComprar(lista){
+    //Se espera que reciba de argumento una lista sin repetidos
+
+        return self.comprasSet().filter({bien => self.noCompre(bien,lista)})
     }
 
-    method faltaComida(){}
+    
+    // #########PROVISORIA##############
+    //preguntar si esta bien llamar por la referencia global
+    //a un metodo exclusivo de ese objeto
+    method faltaComida(){
+        return not compras.contains(comida)
+    }
+    //#######################
 
-    method categoriasCompradas(){}
+    method categoriasCompradas(){
+        return compras.map({bien => bien.categoria()}).asSet()
+    }
+
+
+    
 
     //######## METODOS AUXILIARES #########
 
@@ -83,11 +98,7 @@ object casaDePepeYJulian {
         */
         return compras.head()
     }
-    method ultimaCategoria(){
-        //Proposito : Devuelve la ultima categoria del ultimo bien comprado
-        // *No rompe porque solo se invoca si mi lista de compras no esta vacia*
-        return compras.head().categoria()
-    }
+    
     method compreAlgo(){
         return not compras.isEmpty()
     }
@@ -101,7 +112,13 @@ object casaDePepeYJulian {
      }
 
    
-    // quizas un categoria de ultima compra es mas legible
+    method comprasSet(){
+        return compras.asSet()
+    }
+    method noCompre(bien,lista){
+
+        return lista.contains(bien)
+    }
     // ############################
 
 }
