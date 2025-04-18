@@ -11,10 +11,12 @@ object casaDePepeYJulian {
              se encuentran en "METODOS AUXILIARES"**  al final    
 
             -Las cuentas bancarias son objetos implementados en "cosas.wlk" 
-            la casaDePepeYJulian entiende:
-              cuentaActual(cuentaActual): alternar entre su cuenta corriente y cuentaGastos
-              depositar_enCuenta(dinero,cuenta)
-              extraer_deCuenta(dinero,cuenta)
+            la casaDePepeYJulian entiende de su cuenta:
+
+              *cuentaActual(cuentaActual): alternar entre su cuenta corriente y cuentaGastos
+              *saldoEnCuenta()
+              * depositar_enCuenta(dinero,cuenta)
+              * extraer_deCuenta(dinero,cuenta)
 
     */
 
@@ -40,8 +42,11 @@ object casaDePepeYJulian {
         cuentaActual.extraer(dinero)
     }
 
-// ##########################################################
+/* ##########################################################
 
+            METODOS DE casaDePepeYJulian
+
+   ########################################################## */
     
     method comprar(cosa){ 
         /*
@@ -122,7 +127,7 @@ object casaDePepeYJulian {
     method compre(bien) = compras.contains(bien)
     
     method compreSoloComida() = compras.all({bien => bien.esComestible()}) 
-    
+
 }
 
 
