@@ -10,8 +10,9 @@ describe "test de casa de Julian"{
     casaDePepeYJulian.comprar(cama)
     casaDePepeYJulian.comprar(plancha)
     assert.equals(3,casaDePepeYJulian.cantidadDeCosasCompradas())
-
+    
     assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
+    
     assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
 
     assert.that(casaDePepeYJulian.vieneDeComprar(electrodomestico))
@@ -19,35 +20,57 @@ describe "test de casa de Julian"{
 
     assert.that(casaDePepeYJulian.esDerrochona())
     
+    
     assert.equals([heladera,plancha],casaDePepeYJulian.comprados(electrodomestico))
     assert.equals([cama],casaDePepeYJulian.comprados(mueble))
     
     assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
-
+    
     assert.equals([tiraDeAsado,paqueteDeFideos],
                     casaDePepeYJulian.queFaltaComprar([tiraDeAsado,paqueteDeFideos,plancha]))
 
     assert.that(casaDePepeYJulian.faltaComida())
 
-
+    
     assert.equals(#{electrodomestico,mueble}, casaDePepeYJulian.categoriasCompradas())
 
     
     }
     test "cuenta corriente"{
-              //para la casaDePepeYJulian su cuenta inicia en 0, pero utilizamos un setter no accesible 
-              //para la casa para testear
+              // Utilizo un setter no accesible para el usuario para inicializar 
+              //    el valor del saldo de la cuenta
               
         cuentaCorriente.saldo(20)
+
+       
+        casaDePepeYJulian.cuentaActual(cuentaCorriente)  //designo cuenta corriente como mi cuenta actual
+
+        casaDePepeYJulian.depositar_enCuenta(1000)
+        assert.equals(1020, casaDePepeYJulian.saldoEnCuenta())
+
+        casaDePepeYJulian.extraer_deCuenta(50)
+        assert.equals(970,casaDePepeYJulian.saldoEnCuenta())
+
+        assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000)} )
+
         
-        casaDePepeYJulian.depositar_enCuenta(1000,cuentaCorriente)
-        assert.equals(1020, cuentaCorriente.saldo())
+    }
 
-        casaDePepeYJulian.extraer_deCuenta(50, cuentaCorriente)
-        assert.equals(970,cuentaCorriente.saldo())
+    test "cuentaGastos"{
+        // Utilizo un setter no accesible para el usuario para inicializar 
+        //    el valor del saldo de la cuenta y el costo de operacion
+        cuentaGastos.saldo(500)
+        cuentaGastos.costoOperacion(20)
 
-        assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000, cuentaCorriente)} )
+        casaDePepeYJulian.cuentaActual(cuentaGastos)
 
+        casaDePepeYJulian.depositar_enCuenta(1000)
+
+        assert.equals(1480,casaDePepeYJulian.saldoEnCuenta())
+
+        casaDePepeYJulian.extraer_deCuenta(2000)
+
+        assert.that(true)
         
     }
 }

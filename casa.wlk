@@ -23,16 +23,20 @@ object casaDePepeYJulian {
 
     
     // ########## CUENTAS BANCARIAS ###########
+    method cuentaActual() = cuentaActual
+
+    method saldoEnCuenta() =  cuentaActual.saldo()
+
     method cuentaActual(_cuentaActual){ //
         cuentaActual = _cuentaActual
     }
-
-    method depositar_enCuenta(dinero,cuenta){
-        cuenta.depositar(dinero)
+    // NO NECESITO CUENTA COMO ARGUMENTO PORQUE YA LO HACE EN LA CUENTA ACTUAL
+    method depositar_enCuenta(dinero){
+        cuentaActual.depositar(dinero)
     } 
 
-    method extraer_deCuenta(dinero,cuenta){
-        cuenta.extraer(dinero)
+    method extraer_deCuenta(dinero){
+        cuentaActual.extraer(dinero)
     }
 
     
@@ -75,45 +79,27 @@ object casaDePepeYJulian {
                                   )
     }
 
-    method comprados(categoria) = compras.filter({bien => bien.categoria()==categoria}) 
+    method comprados(categoria) = compras.filter({bien => bien.categoria() == categoria}) 
     
 
-    // #######################################################
-    // SOLUCION PROVISORIA
+
     method malaEpoca(){
-        return compras.all({bien => self.esDeCategoria(bien,comida)})
+        return compras.all({bien => bien.esDeComestible()})
     }
 
    
-    // ######################################################
+    
 
     method queFaltaComprar(lista){
     /* PROPOSITO: devuelve una lista de objetos de **lista** que no compre,
                   es decir, que no esta en **compras**,
             *Se espera que reciba de argumento una lista sin repetidos*/
 
-        return lista.filter({bien => not (self.compre(bien,compras))})
+        return lista.filter({bien => not (self.compre(bien))})
     }
 
+    method faltaComida() =  not self.compreSoloComida()
     
-    /* #############  PREGUNTA! ##########################
-        Al principio habia escrito:
-
-        method faltaComida() = compras.contains(comida)
-
-        ¿Esta mal ya que estoy llamando a comida usando su referencia global?
-        Si este metodo es exclusivo para llamar a la referencia **comida**,¿ esta bien
-        usar su referencia global o podria acarrear problemas?
-
-        Use una subtarea para llamar distintos bienes como argumento 
-        por esta duda mas abajo.
-
-    #####################################################*/
-    method faltaComida() =  not self.compre(comida,compras)
-    
-    
-
-
     method categoriasCompradas() = compras.map({bien => bien.categoria()}).asSet()
 
 
@@ -141,10 +127,14 @@ object casaDePepeYJulian {
 
    
     method comprasSet() = compras.asSet()
+
+    method compre(bien) = compras.contains(bien)
     
-    method compre(bien,lista) =  lista.contains(bien)
+    method compreSoloComida() {
+         return compras.all({bien => bien.esComestible()}) 
+    }
     
-    method esDeCategoria(bien,categoria) = bien.categoria()==categoria
+   
     
    
 
