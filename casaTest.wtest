@@ -1,6 +1,9 @@
 import casa.*
 import  cosas.*
 
+/*#################################
+       AUN NO ESTA TERMINADO!!!
+* ################################# */
 describe "test de compras"{
     test "Hacer que se compre una heladera, una cama y una placha"{
     casaDePepeYJulian.comprar(heladera)

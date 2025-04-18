@@ -1,5 +1,14 @@
 import cosas.* 
 
+
+
+
+
+
+
+/*#################################
+       AUN NO ESTA TERMINADO!!!
+* ################################# */
 object casaDePepeYJulian {
 
     /*  "compras":
