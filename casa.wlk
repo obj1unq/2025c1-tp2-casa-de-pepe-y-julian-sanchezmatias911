@@ -1,44 +1,59 @@
 import cosas.* 
 
-
-
-
-
-
-
-/*#################################
-       AUN NO ESTA TERMINADO!!!
-* ################################# */
 object casaDePepeYJulian {
 
-    /*  "compras":
-             *puede comprar cosas repetidas
+    /*  ACLARACIONES:
+            -En **compras** puede haber repetidos
             
+            -Uso **bien** de argumento como singular de **bienes** que son los distintos objetos que puede comprar            
 
-        **los metodos que no son de la Interfaz de casaDePepeYJulian 
-            se encuentran en "METODOS AUXILIARES"**     
+            -los metodos que no son de la Interfaz de casaDePepeYJulian 
+             se encuentran en "METODOS AUXILIARES"**  al final    
+
+            -Las cuentas bancarias son objetos implementados en "cosas.wlk" 
+            la casaDePepeYJulian entiende:
+              cuentaActual(cuentaActual): alternar entre su cuenta corriente y cuentaGastos
+              depositar_enCuenta(dinero,cuenta)
+              extraer_deCuenta(dinero,cuenta)
+
     */
-    const compras =[] //list
-    //const historialCompras = [] // list
+
+    const compras =[] 
+    var cuentaActual = cuentaCorriente
+
+    
+    // ########## CUENTAS BANCARIAS ###########
+    method cuentaActual(_cuentaActual){ //
+        cuentaActual = _cuentaActual
+    }
+
+    method depositar_enCuenta(dinero,cuenta){
+        cuenta.depositar(dinero)
+    } 
+
+    method extraer_deCuenta(dinero,cuenta){
+        cuenta.extraer(dinero)
+    }
+
+    
+
+   
+    
+
+    // ######################################## 
+
     
     method comprar(cosa){ 
         compras.add(cosa)
     }
 
-    method cantidadDeCosasCompradas(){
-        return compras.size()
-    }
+    method cantidadDeCosasCompradas() = compras.size()
 
-    method tieneAlgun(categoria){
-        /*
-        */
-        return compras.any({bien =>bien.categoria() == categoria})
-    }
+    method tieneAlgun(categoria) = compras.any({bien =>bien.categoria() == categoria})
+    
 
     method vieneDeComprar(categoria){ //
-            /*
-
-            */
+            
             if (not self.compreAlgo()){ 
                     self.error("no compre nada de nada")
             }
@@ -46,9 +61,8 @@ object casaDePepeYJulian {
             return self.ultimaCompra().categoria() == categoria
     }
 
-    method esDerrochona(){ 
-        return self.importeTotal()>= 9000
-    }
+    method esDerrochona() = self.importeTotal()>= 9000
+    
 
      method compraMasCara(){
          /*
@@ -61,10 +75,8 @@ object casaDePepeYJulian {
                                   )
     }
 
-    method comprados(categoria){
-        /**/
-        return compras.filter({bien => bien.categoria()==categoria}) 
-    }
+    method comprados(categoria) = compras.filter({bien => bien.categoria()==categoria}) 
+    
 
     // #######################################################
     // SOLUCION PROVISORIA
@@ -72,34 +84,42 @@ object casaDePepeYJulian {
         return compras.all({bien => self.esDeCategoria(bien,comida)})
     }
 
-    method esDeCategoria(bien,categoria){
-        return bien.categoria()==categoria
-    }
+   
     // ######################################################
 
     method queFaltaComprar(lista){
-    /*Se espera que reciba de argumento una lista sin repetidos*/
+    /* PROPOSITO: devuelve una lista de objetos de **lista** que no compre,
+                  es decir, que no esta en **compras**,
+            *Se espera que reciba de argumento una lista sin repetidos*/
 
         return lista.filter({bien => not (self.compre(bien,compras))})
     }
 
     
-    // #########PROVISORIA##############
-    //preguntar si esta bien llamar por la referencia global
-    //a un metodo que llama exclusivamente a ese objeto 
-    method faltaComida(){
-        return not compras.contains(comida)
-    }
-    //#######################
+    /* #############  PREGUNTA! ##########################
+        Al principio habia escrito:
 
-    method categoriasCompradas(){
-        return compras.map({bien => bien.categoria()}).asSet()
-    }
+        method faltaComida() = compras.contains(comida)
 
+        ¿Esta mal ya que estoy llamando a comida usando su referencia global?
+        Si este metodo es exclusivo para llamar a la referencia **comida**,¿ esta bien
+        usar su referencia global o podria acarrear problemas?
 
+        Use una subtarea para llamar distintos bienes como argumento 
+        por esta duda mas abajo.
+
+    #####################################################*/
+    method faltaComida() =  not self.compre(comida,compras)
+    
     
 
-    //######## METODOS AUXILIARES #########
+
+    method categoriasCompradas() = compras.map({bien => bien.categoria()}).asSet()
+
+
+    // ####################################################################
+    //                           METODOS AUXILIARES
+    // ####################################################################
 
     method ultimaCompra(){
         /*  Proposito : Devuelve el ultimo bien comprado
@@ -108,9 +128,8 @@ object casaDePepeYJulian {
         return compras.last()
     }
     
-    method compreAlgo(){
-        return not compras.isEmpty()
-    }
+    method compreAlgo()=  not compras.isEmpty()
+    
 
     method importeTotal(){
         /*
@@ -121,14 +140,13 @@ object casaDePepeYJulian {
      }
 
    
-    method comprasSet(){
-        return compras.asSet()
-    }
-    method compre(bien,lista){
-
-        return lista.contains(bien)
-    }
-    // ############################
+    method comprasSet() = compras.asSet()
+    
+    method compre(bien,lista) =  lista.contains(bien)
+    
+    method esDeCategoria(bien,categoria) = bien.categoria()==categoria
+    
+   
 
 }
 

@@ -34,4 +34,20 @@ describe "test de casa de Julian"{
 
     
     }
+    test "cuenta corriente"{
+              //para la casaDePepeYJulian su cuenta inicia en 0, pero utilizamos un setter no accesible 
+              //para la casa para testear
+              
+        cuentaCorriente.saldo(20)
+        
+        casaDePepeYJulian.depositar_enCuenta(1000,cuentaCorriente)
+        assert.equals(1020, cuentaCorriente.saldo())
+
+        casaDePepeYJulian.extraer_deCuenta(50, cuentaCorriente)
+        assert.equals(970,cuentaCorriente.saldo())
+
+        assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000, cuentaCorriente)} )
+
+        
+    }
 }
