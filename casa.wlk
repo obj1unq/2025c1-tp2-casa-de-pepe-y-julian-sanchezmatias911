@@ -24,7 +24,7 @@ object casaDePepeYJulian {
     var cuentaActual = cuentaCorriente
 
     
-// ############## CUENTAS BANCARIAS #########################
+// ################################### CUENTAS BANCARIAS #################################################
 
     method cuentaActual() = cuentaActual
 
@@ -42,11 +42,11 @@ object casaDePepeYJulian {
         cuentaActual.extraer(dinero)
     }
 
-/* ##########################################################
+/* #######################################################################################################
 
-            METODOS DE casaDePepeYJulian
+                                METODOS DE casaDePepeYJulian
 
-   ########################################################## */
+   #################################################################################################### */
     
     method comprar(cosa){ 
         /*
@@ -99,10 +99,9 @@ object casaDePepeYJulian {
     
     method categoriasCompradas() = compras.map({bien => bien.categoria()}).asSet()
 
-
-    // ####################################################################
-    //                           METODOS AUXILIARES
-    // ####################################################################
+// #######################################################################################################
+//                           METODOS AUXILIARES
+// #######################################################################################################
 
     method ultimaCompra(){
         /*  Proposito : Devuelve el ultimo bien comprado

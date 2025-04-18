@@ -1,13 +1,10 @@
 import casa.*
 import  cosas.*
 
-/*#################################
-       AUN NO ESTA TERMINADO!!!
-* ################################# */
 describe "test de casa de Julian "{
 
     test "Hacer que se compre una heladera, una cama y una placha, teniendo saldo suficiente"{
-    //inicio su cuenta corriente
+   
     casaDePepeYJulian.cuentaActual(cuentaCorriente)
     casaDePepeYJulian.depositar_enCuenta(100000)
     //    
@@ -46,9 +43,8 @@ describe "test de casa de Julian "{
               //    el valor del saldo de la cuenta
               
         cuentaCorriente.saldo(20)
+        casaDePepeYJulian.cuentaActual(cuentaCorriente) 
 
-       
-        casaDePepeYJulian.cuentaActual(cuentaCorriente)  //designo cuenta corriente como mi cuenta actual
 
         casaDePepeYJulian.depositar_enCuenta(1000)
         assert.equals(1020, casaDePepeYJulian.saldoEnCuenta())
@@ -57,12 +53,10 @@ describe "test de casa de Julian "{
         assert.equals(970,casaDePepeYJulian.saldoEnCuenta())
 
         assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000)} )
-
-        
     }
 
     test "cuentaGastos"{
-        // Utilizo un setter no accesible para el usuario para inicializar 
+        // Utilizo 2 setter no accesible para el usuario para inicializar 
         //    el valor del saldo de la cuenta y el costo de operacion
         cuentaGastos.saldo(500)
         cuentaGastos.costoOperacion(20)
@@ -78,7 +72,7 @@ describe "test de casa de Julian "{
     }
 
     test "al comprar una cosa eso se vea afectado en la cuenta elegida previamente."{
-        
+
         casaDePepeYJulian.cuentaActual(cuentaCorriente)
         casaDePepeYJulian.depositar_enCuenta(1000)
         assert.equals(1000, casaDePepeYJulian.saldoEnCuenta())

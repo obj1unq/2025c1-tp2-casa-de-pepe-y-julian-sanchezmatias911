@@ -74,8 +74,14 @@ object cuentaCorriente{
         else {saldo -= dinero}
     }
 
-	method gastar(dinero){saldo = saldo - dinero}
-	method meAlcanza(dinero) = saldo >= dinero
+	method gastarSiAlcanza(dinero){
+		if(self.meAlcanza(dinero)){
+			saldo = saldo - dinero
+		} 
+		else {self.error("No hay saldo en esta cuenta")}
+	}
+
+	method meAlcanza(monto) = saldo >= monto
 }
 object cuentaGastos {
 	var saldo = 0 // valor iniciar para casaDePepeYJulian
@@ -105,7 +111,8 @@ object cuentaGastos {
 		if(self.meAlcanza(dinero)){
 			saldo = saldo - dinero
 		} 
-		else {self.error("No hay saldo en esta cuenta")}//se espera que casaDePepeYJulian se pregunte si le alcanza antes de comprar
+		else {self.error("No hay saldo en esta cuenta")}
 	}
-	method meAlcanza(dinero) = saldo >= dinero
+
+	method meAlcanza(monto) = saldo >= monto
 }
