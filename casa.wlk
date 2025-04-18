@@ -1,4 +1,111 @@
 import cosas.* 
 
 object casaDePepeYJulian {
+
+    /*  "compras":
+             *puede comprar cosas repetidas
+            
+
+        **los metodos que no son de la Interfaz de casaDePepeYJulian 
+            se encuentran en "METODOS AUXILIARES"**     
+    */
+    const compras =[] //list
+    //const historialCompras = [] // list
+    
+    method comprar(cosa){ 
+        compras.add(cosa)
+    }
+
+    method cantidadDeCosasCompradas(){
+        return compras.size()
+    }
+
+    method tieneAlgun(categoria){
+        /*
+        */
+        return compras.any({bien =>bien.categoria() == categoria})
+    }
+
+    method vieneDeComprar(categoria){ //
+            /*
+
+            */
+            if (not self.compreAlgo()){ 
+                    self.error("no compre nada de nada")
+            }
+
+            return self.ultimaCompra().categoria() == categoria
+    }
+
+    method esDerrochona(){ 
+        return self.importeTotal()>= 9000
+    }
+
+     method compraMasCara(){
+         /*
+            Proposito: 
+                *devuelve el objeto con el precio mas caro de mi lista de compras
+                *si no he comprado nada lanza una excepcion
+         */
+         return compras.maxIfEmpty({bien => bien.precio()}, 
+                                   {"No he comprado nada"} 
+                                  )
+    }
+
+    method comprados(categoria){
+        /**/
+        return compras.filter({bien => bien.categoria()==categoria}) 
+    }
+
+    // ################################
+    // SOLUCION PROVISORIA
+    method malaEpoca(){
+        return compras.all({bien => self.esDeCategoria(bien,comida)})
+    }
+
+    method esDeCategoria(bien,categoria){
+        return bien.categoria()==categoria
+    }
+    // ###############################
+
+    method queFaltaComprar(lista){//pregunta
+    }
+
+    method faltaComida(){}
+
+    method categoriasCompradas(){}
+
+    //######## METODOS AUXILIARES #########
+
+    method ultimaCompra(){
+        /*  Proposito : Devuelve el ultimo bien comprado
+            **No rompe porque solo se invoca si mi lista de compras no esta vacia**
+        */
+        return compras.head()
+    }
+    method ultimaCategoria(){
+        //Proposito : Devuelve la ultima categoria del ultimo bien comprado
+        // *No rompe porque solo se invoca si mi lista de compras no esta vacia*
+        return compras.head().categoria()
+    }
+    method compreAlgo(){
+        return not compras.isEmpty()
+    }
+
+    method importeTotal(){
+        /*
+            Proposito: Si compre bienes me da la suma de todas las compras
+                       En caso de no haber comprado retorna 0 
+        */
+        return compras.sum({bien => bien.precio()})
+     }
+
+   
+    // quizas un categoria de ultima compra es mas legible
+    // ############################
+
 }
+
+
+
+
