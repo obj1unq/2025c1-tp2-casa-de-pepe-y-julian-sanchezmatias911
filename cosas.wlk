@@ -50,5 +50,21 @@ object cuentaCorriente{
     }
 }
 object cuentaGastos {
+	var saldo = 0
+	const costoOperacion = 20
 
+	method saldo() = saldo
+
+	method saldo(_saldo){saldo= _saldo} // para testear
+
+	method depositar(dinero){
+		if (dinero>1000){
+			self.error("limite de 1000 pesos para depositar")
+		}
+		saldo = saldo  + dinero - costoOperacion
+	}
+
+	method extraer(dinero) {
+		saldo = saldo - dinero
+	}
 }
