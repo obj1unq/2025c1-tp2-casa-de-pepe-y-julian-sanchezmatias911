@@ -96,10 +96,14 @@ object cuentaGastos {
 	}
 
 	method depositar(dinero){
-		if (dinero>1000){
-			self.error("limite de 1000 pesos para depositar")
+		if (self.validarDeposito(dinero)){
+			self.error("Lmite de 1000 pesos para depositar")
 		}
 		saldo = saldo  + dinero - costoOperacion
+	}
+
+	method validarDeposito(dinero){
+		return dinero>1000
 	}
 
 	method extraer(dinero) {
