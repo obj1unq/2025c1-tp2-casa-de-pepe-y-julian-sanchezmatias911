@@ -62,7 +62,10 @@ object casaDePepeYJulian {
     method tieneAlgun(categoria) = compras.any({bien =>bien.categoria() == categoria})
     
     method vieneDeComprar(categoria){ 
-            
+            /*
+                *Si la lista de compras esta vacia lanza una excepcion
+                
+            */
             if (not self.compreAlgo()){ 
                     self.error("no compre nada de nada")
             }
