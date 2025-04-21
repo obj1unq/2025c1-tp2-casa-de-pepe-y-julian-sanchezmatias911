@@ -69,19 +69,35 @@ object cuentaCorriente{
         saldo += dinero
     }
 
-    method extraer(dinero){
+    /*method extraer(dinero){
         if((saldo-dinero) < 0){self.error("no cuenta con dinero suficiente")}
         else {saldo -= dinero}
+    }*/
+	method extraer(dinero){
+        if(self.validarExtraccion(dinero)){
+			saldo -= dinero
+			}
+        else {
+			self.error("no cuenta con dinero suficiente")
+		}
     }
 
+
+	method validarExtraccion(dinero){
+		return (saldo -dinero) > 0
+	}
+	/*
 	method gastarSiAlcanza(dinero){
 		if(self.meAlcanza(dinero)){
 			saldo = saldo - dinero
 		} 
 		else {self.error("No hay saldo en esta cuenta")}
 	}
+	*/
 
 	method meAlcanza(monto) = saldo >= monto
+
+	method validarDeposito(dinero) {}
 }
 object cuentaGastos {
 	var saldo = 0 // valor iniciar para casaDePepeYJulian
@@ -110,13 +126,16 @@ object cuentaGastos {
 		saldo = saldo - dinero
 	}
 
-	
+	/*
 	method gastarSiAlcanza(dinero){
 		if(self.meAlcanza(dinero)){
 			saldo = saldo - dinero
 		} 
 		else {self.error("No hay saldo en esta cuenta")}
 	}
+	*/
 
 	method meAlcanza(monto) = saldo >= monto
+
+	method validarExtraccion(dinero){}
 }

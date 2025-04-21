@@ -28,7 +28,7 @@ object casaDePepeYJulian {
 
     method cuentaActual() = cuentaActual
 
-    method saldoEnCuenta() =  cuentaActual.saldo()
+    
 
     method cuentaActual(_cuentaActual){ //
         cuentaActual = _cuentaActual
@@ -53,7 +53,7 @@ object casaDePepeYJulian {
             -Si alcanza el dinero del saldo, compra actualizando su saldo y lista de compras
             -Si no alcanza lanza una excepcion
         */
-        cuentaActual.gastarSiAlcanza(cosa.precio()) 
+        cuentaActual.extraer(cosa.precio()) 
         compras.add(cosa)
     }
     
@@ -85,7 +85,7 @@ object casaDePepeYJulian {
 
     method comprados(categoria) = compras.filter({bien => bien.categoria() == categoria}) 
     
-    method malaEpoca()= compras.all({bien => bien.esDeComestible()})
+    method malaEpoca()= compras.all({bien => bien.esComestible()})
     
     method queFaltaComprar(lista){
     /* PROPOSITO: devuelve una lista de objetos de **lista** que no compre,

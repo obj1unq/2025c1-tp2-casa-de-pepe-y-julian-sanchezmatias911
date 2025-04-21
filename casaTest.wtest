@@ -47,10 +47,10 @@ describe "test de casa de Julian "{
 
 
         casaDePepeYJulian.depositar_enCuenta(1000)
-        assert.equals(1020, casaDePepeYJulian.saldoEnCuenta())
+        assert.equals(1020, cuentaCorriente.saldo())
 
         casaDePepeYJulian.extraer_deCuenta(50)
-        assert.equals(970,casaDePepeYJulian.saldoEnCuenta())
+        assert.equals(970,cuentaCorriente.saldo())
 
         assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000)} )
     }
@@ -65,7 +65,7 @@ describe "test de casa de Julian "{
 
         casaDePepeYJulian.depositar_enCuenta(1000)
 
-        assert.equals(1480,casaDePepeYJulian.saldoEnCuenta())
+        assert.equals(1480,cuentaGastos.saldo())
 
         casaDePepeYJulian.extraer_deCuenta(2000)
 
@@ -75,11 +75,11 @@ describe "test de casa de Julian "{
 
         casaDePepeYJulian.cuentaActual(cuentaCorriente)
         casaDePepeYJulian.depositar_enCuenta(1000)
-        assert.equals(1000, casaDePepeYJulian.saldoEnCuenta())
+        assert.equals(1000, cuentaCorriente.saldo())
 
         casaDePepeYJulian.comprar(tiraDeAsado)
         casaDePepeYJulian.comprar(paqueteDeFideos)
-        assert.equals(600, casaDePepeYJulian.saldoEnCuenta())
+        assert.equals(600, cuentaCorriente.saldo())
         
     }
 }
