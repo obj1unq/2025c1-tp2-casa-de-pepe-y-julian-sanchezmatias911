@@ -71,7 +71,7 @@ describe "test de casa de Julian "{
 
     }
 
-    test "al comprar una cosa eso se vea afectado en la cuenta elegida previamente."{
+    test "Se realiza compras y se verifica que se desconto de la cuenta."{
 
         casaDePepeYJulian.cuentaActual(cuentaCorriente)
         casaDePepeYJulian.depositar_enCuenta(1000)
