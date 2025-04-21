@@ -1,0 +1,85 @@
+import casa.*
+import  cosas.*
+
+describe "test de casa de Julian "{
+
+    test "Hacer que se compre una heladera, una cama y una placha, teniendo saldo suficiente"{
+   
+    casaDePepeYJulian.cuentaActual(cuentaCorriente)
+    casaDePepeYJulian.depositar_enCuenta(100000)
+    //    
+    casaDePepeYJulian.comprar(heladera)
+    casaDePepeYJulian.comprar(cama)
+    casaDePepeYJulian.comprar(plancha)
+    assert.equals(3,casaDePepeYJulian.cantidadDeCosasCompradas())
+    
+    assert.that(casaDePepeYJulian.tieneAlgun(electrodomestico))
+    
+    assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
+
+    assert.that(casaDePepeYJulian.vieneDeComprar(electrodomestico))
+    assert.notThat(casaDePepeYJulian.vieneDeComprar(mueble))
+
+    assert.that(casaDePepeYJulian.esDerrochona())
+    
+    
+    assert.equals([heladera,plancha],casaDePepeYJulian.comprados(electrodomestico))
+    assert.equals([cama],casaDePepeYJulian.comprados(mueble))
+    
+    assert.notThat(casaDePepeYJulian.tieneAlgun(comida))
+    
+    assert.equals([tiraDeAsado,paqueteDeFideos],
+                    casaDePepeYJulian.queFaltaComprar([tiraDeAsado,paqueteDeFideos,plancha]))
+
+    assert.that(casaDePepeYJulian.faltaComida())
+
+    
+    assert.equals(#{electrodomestico,mueble}, casaDePepeYJulian.categoriasCompradas())
+
+    
+    }
+    test "cuenta corriente"{
+              // Utilizo un setter no accesible para el usuario para inicializar 
+              //    el valor del saldo de la cuenta
+              
+        cuentaCorriente.saldo(20)
+        casaDePepeYJulian.cuentaActual(cuentaCorriente) 
+
+
+        casaDePepeYJulian.depositar_enCuenta(1000)
+        assert.equals(1020, cuentaCorriente.saldo())
+
+        casaDePepeYJulian.extraer_deCuenta(50)
+        assert.equals(970,cuentaCorriente.saldo())
+
+        assert.throwsException({ casaDePepeYJulian.extraer_deCuenta(2000)} )
+    }
+
+    test "cuentaGastos"{
+        // Utilizo 2 setter no accesible para el usuario para inicializar 
+        //    el valor del saldo de la cuenta y el costo de operacion
+        cuentaGastos.saldo(500)
+        cuentaGastos.costoOperacion(20)
+
+        casaDePepeYJulian.cuentaActual(cuentaGastos)
+
+        casaDePepeYJulian.depositar_enCuenta(1000)
+
+        assert.equals(1480,cuentaGastos.saldo())
+
+        casaDePepeYJulian.extraer_deCuenta(2000)
+
+    }
+
+    test "Se realiza compras y se verifica que se desconto de la cuenta."{
+
+        casaDePepeYJulian.cuentaActual(cuentaCorriente)
+        casaDePepeYJulian.depositar_enCuenta(1000)
+        assert.equals(1000, cuentaCorriente.saldo())
+
+        casaDePepeYJulian.comprar(tiraDeAsado)
+        casaDePepeYJulian.comprar(paqueteDeFideos)
+        assert.equals(600, cuentaCorriente.saldo())
+        
+    }
+}
